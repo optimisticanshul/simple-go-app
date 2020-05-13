@@ -1,0 +1,36 @@
+--- 
+    apiVersion: networking.k8s.io/v1beta1
+    kind: Ingress
+    metadata: 
+      annotations: 
+        nginx.ingress.kubernetes.io/rewrite-target: /$1
+      name: hello-ingress
+    spec: 
+      rules: 
+        - 
+          host: challenge.local
+          http: 
+            paths: 
+              - 
+                backend: 
+                  serviceName: service
+                  servicePort: 8080
+                path: /
+--- 
+    apiVersion: networking.k8s.io/v1beta1
+    kind: Ingress
+    metadata: 
+      annotations: 
+        nginx.ingress.kubernetes.io/rewrite-target: /detectify
+      name: hello-again-ingress
+    spec: 
+      rules:         
+        - 
+          host: detectify.challenge.local
+          http: 
+            paths: 
+              - 
+                backend: 
+                  serviceName: service
+                  servicePort: 8080
+                path: /
